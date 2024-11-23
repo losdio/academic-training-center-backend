@@ -1,3 +1,5 @@
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./swaggerConfig');
 const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
@@ -5,17 +7,26 @@ const authRoutes = require('./routes/auth');
 const courseRoutes = require('./routes/course');
 const assignmentRoutes = require('./routes/assignment');
 const attendanceRoutes = require('./routes/attendance');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100 
+});
 
 dotenv.config();
 const app = express();
 
 // Middleware
 app.use(express.json());
+app.use(helmet());
+app.use(limiter);
 
 // Connect Database
 connectDB();
 
 // Routes
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/assignments', assignmentRoutes);

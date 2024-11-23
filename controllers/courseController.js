@@ -1,5 +1,59 @@
 const Course = require('../models/Course');
 
+// Create a new course
+exports.createCourse = async (req, res) => {
+    const { name, description, price } = req.body;
+    try {
+        const course = new Course({ name, description, price, trainer: req.user.id });
+        await course.save();
+        res.status(201).json(course);
+    } catch (error) {
+        res.status(500).json({ error: 'Error creating course' });
+    }
+};
+
+// Update a course
+exports.updateCourse = async (req, res) => {
+    const { courseId } = req.params;
+    const { name, description, price } = req.body;
+    try {
+        const course = await Course.findById(courseId);
+        if (!course) return res.status(404).json({ error: 'Course not found' });
+
+        course.name = name || course.name;
+        course.description = description || course.description;
+        course.price = price || course.price;
+        await course.save();
+
+        res.status(200).json(course);
+    } catch (error) {
+        res.status(500).json({ error: 'Error updating course' });
+    }
+};
+
+// Delete a course
+exports.deleteCourse = async (req, res) => {
+    const { courseId } = req.params;
+    try {
+        const course = await Course.findByIdAndDelete(courseId);
+        if (!course) return res.status(404).json({ error: 'Course not found' });
+
+        res.status(200).json({ message: 'Course deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error deleting course' });
+    }
+};
+
+// List all courses
+exports.listCourses = async (req, res) => {
+    try {
+        const courses = await Course.find().populate('trainer', 'name email');
+        res.status(200).json(courses);
+    } catch (error) {
+        res.status(500).json({ error: 'Error fetching courses' });
+    }
+};
+
 exports.getAllCourses = async (req, res) => {
     try {
         const courses = await Course.find().populate('trainer');
@@ -8,6 +62,35 @@ exports.getAllCourses = async (req, res) => {
         res.status(500).json({ error: 'Error fetching courses' });
     }
 };
+
+exports.getMyCourseById = async (req, res) => {
+    const { courseId } = req.params;
+
+    try {
+        const course = await Course.findOne({
+            _id: courseId,
+            enrolledTrainees: req.user.id
+        })
+            .populate('trainer')
+            .populate('assignments.submissions.trainee') // Populate submissions if needed
+            .populate('attendance.attendees'); // Populate attendance if needed
+
+        if (!course) {
+            return res.status(404).json({ error: 'Course not found or you are not enrolled' });
+        }
+
+        // Check if the course is done and mark it accordingly
+        const completionCriteriaMet = true; // Replace with actual criteria logic
+        if (completionCriteriaMet) {
+            course.status = 'done';
+        }
+
+        res.status(200).json(course);
+    } catch (error) {
+        res.status(500).json({ error: 'Error fetching the course' });
+    }
+};
+
 
 exports.enrollInCourse = async (req, res) => {
     const { courseId } = req.params;
