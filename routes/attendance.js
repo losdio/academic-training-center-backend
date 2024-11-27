@@ -21,7 +21,7 @@ const router = express.Router();
  *       200:
  *         description: Attendance marked successfully
  */
-router.post('/attendance/:courseId', authMiddleware, markAttendance);
+router.post('/:courseId', authMiddleware, markAttendance);
 
 /**
  * @swagger
@@ -41,6 +41,6 @@ router.post('/attendance/:courseId', authMiddleware, markAttendance);
  *       200:
  *         description: Attendance report retrieved successfully
  */
-router.get('/attendance/:courseId', authMiddleware, getAttendance);
+router.get('/:courseId', authMiddleware, getAttendance);
 
 module.exports = router;

@@ -27,7 +27,7 @@ const router = express.Router();
  *       201:
  *         description: Course created successfully
  */
-router.post('/courses', authMiddleware, trainerMiddleware, createCourse);
+router.post('/', authMiddleware, trainerMiddleware, createCourse);
 
 /**
  * @swagger
@@ -47,7 +47,7 @@ router.post('/courses', authMiddleware, trainerMiddleware, createCourse);
  *       200:
  *         description: Course updated successfully
  */
-router.put('/courses/:courseId', authMiddleware, trainerMiddleware, updateCourse);
+router.put('/:courseId', authMiddleware, trainerMiddleware, updateCourse);
 
 /**
  * @swagger
@@ -67,7 +67,7 @@ router.put('/courses/:courseId', authMiddleware, trainerMiddleware, updateCourse
  *       200:
  *         description: Course deleted successfully
  */
-router.delete('/courses/:courseId', authMiddleware, trainerMiddleware, deleteCourse);
+router.delete('/:courseId', authMiddleware, trainerMiddleware, deleteCourse);
 
 /**
  * @swagger
@@ -79,7 +79,7 @@ router.delete('/courses/:courseId', authMiddleware, trainerMiddleware, deleteCou
  *       200:
  *         description: List of all courses
  */
-router.get('/courses', listCourses);
+router.get('/', listCourses);
 
 /**
  * @swagger
@@ -91,7 +91,7 @@ router.get('/courses', listCourses);
  *       200:
  *         description: List of all courses
  */
-router.get('/courses/all', getAllCourses);
+router.get('/all', getAllCourses);
 
 /**
  * @swagger
@@ -111,7 +111,7 @@ router.get('/courses/all', getAllCourses);
  *       200:
  *         description: Enrolled in course successfully
  */
-router.post('/courses/enroll/:courseId', authMiddleware, enrollInCourse);
+router.post('/enroll/:courseId', authMiddleware, enrollInCourse);
 
 /**
  * @swagger
@@ -125,7 +125,7 @@ router.post('/courses/enroll/:courseId', authMiddleware, enrollInCourse);
  *       200:
  *         description: List of my courses
  */
-router.get('/courses/my', authMiddleware, getMyCourses);
+router.get('/my', authMiddleware, getMyCourses);
 
 /**
  * @swagger
@@ -145,6 +145,6 @@ router.get('/courses/my', authMiddleware, getMyCourses);
  *       200:
  *         description: Course details
  */
-router.get('/courses/my/:courseId', authMiddleware, getMyCourseById);
+router.get('/my/:courseId', authMiddleware, getMyCourseById);
 
 module.exports = router;

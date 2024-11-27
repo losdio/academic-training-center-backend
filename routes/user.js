@@ -18,7 +18,7 @@ const router = express.Router();
  *       401:
  *         description: Unauthorized
  */
-router.get('/me', authMiddleware, getUserProfile);
+router.get('/', authMiddleware, getUserProfile);
 
 /**
  * @swagger
@@ -47,7 +47,7 @@ router.get('/me', authMiddleware, getUserProfile);
  *       401:
  *         description: Unauthorized
  */
-router.put('/me', authMiddleware, updateUserProfile);
+router.put('/', authMiddleware, updateUserProfile);
 
 /**
  * @swagger
@@ -63,6 +63,6 @@ router.put('/me', authMiddleware, updateUserProfile);
  *       401:
  *         description: Unauthorized
  */
-router.get('/users', authMiddleware, adminMiddleware, listUsers);
+router.get('/', authMiddleware, adminMiddleware, listUsers);
 
 module.exports = router;

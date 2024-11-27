@@ -21,7 +21,7 @@ const router = express.Router();
  *       201:
  *         description: Assignment added successfully
  */
-router.post('/assignments/:courseId', authMiddleware, addAssignment);
+router.post('/:courseId', authMiddleware, addAssignment);
 
 /**
  * @swagger
@@ -46,6 +46,6 @@ router.post('/assignments/:courseId', authMiddleware, addAssignment);
  *       200:
  *         description: Assignment submitted successfully
  */
-router.post('/assignments/submit/:courseId/:assignmentId', authMiddleware, submitAssignment);
+router.post('/submit/:courseId/:assignmentId', authMiddleware, submitAssignment);
 
 module.exports = router;

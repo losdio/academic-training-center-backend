@@ -28,7 +28,7 @@ const router = express.Router();
  *       400:
  *         description: Invalid input
  */
-router.post('/announcement', createAnnouncement);
+router.post('/', createAnnouncement);
 
 /**
  * @swagger
@@ -42,7 +42,7 @@ router.post('/announcement', createAnnouncement);
  *       500:
  *         description: Server error
  */
-router.get('/announcement', getAllAnnouncements);
+router.get('/', getAllAnnouncements);
 
 /**
  * @swagger
@@ -63,7 +63,7 @@ router.get('/announcement', getAllAnnouncements);
  *       404:
  *         description: Announcement not found
  */
-router.get('/announcement/:id', getAnnouncementById);
+router.get('/:id', getAnnouncementById);
 
 /**
  * @swagger
@@ -99,7 +99,7 @@ router.get('/announcement/:id', getAnnouncementById);
  *       404:
  *         description: Announcement not found
  */
-router.put('/announcement/:id', updateAnnouncement);
+router.put('/:id', updateAnnouncement);
 
 /**
  * @swagger
@@ -120,6 +120,6 @@ router.put('/announcement/:id', updateAnnouncement);
  *       404:
  *         description: Announcement not found
  */
-router.delete('/announcement/:id', deleteAnnouncement);
+router.delete('/:id', deleteAnnouncement);
 
 module.exports = router;

@@ -11,7 +11,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /register:
+ * /auth/register:
  *   post:
  *     summary: Register a new user
  *     tags: [Authentication]
@@ -41,7 +41,7 @@ router.post('/register', registerUser);
 
 /**
  * @swagger
- * /login:
+ * /auth/login:
  *   post:
  *     summary: Login a user
  *     tags: [Authentication]
@@ -66,7 +66,7 @@ router.post('/login', loginUser);
 
 /**
  * @swagger
- * /forgot-password:
+ * /auth/forgot-password:
  *   post:
  *     summary: Request password reset
  *     tags: [Authentication]
@@ -89,7 +89,7 @@ router.post('/forgot-password', forgotPassword);
 
 /**
  * @swagger
- * /reset-password:
+ * /auth/reset-password:
  *   post:
  *     summary: Reset password
  *     tags: [Authentication]
