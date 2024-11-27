@@ -2,6 +2,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./swaggerConfig');
 const express = require('express');
 const dotenv = require('dotenv');
+require('dotenv').config();
 const connectDB = require('./config/db');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
@@ -10,12 +11,15 @@ const assignmentRoutes = require('./routes/assignment');
 const attendanceRoutes = require('./routes/attendance');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 100 
 });
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('Connected successfully'))
+.catch(err => console.error('Connection failed:', err));
+
 dotenv.config();
 const app = express();
 
