@@ -9,6 +9,8 @@ const authRoutes = require('./routes/auth');
 const courseRoutes = require('./routes/course');
 const assignmentRoutes = require('./routes/assignment');
 const attendanceRoutes = require('./routes/attendance');
+const announcementRoutes = require('./routes/announcement');
+const userRoutes = require('./routes/user');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 
@@ -37,6 +39,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/assignments', assignmentRoutes);
 app.use('/api/attendance', attendanceRoutes);
+app.use('/api/announcement', announcementRoutes);
+app.use('/api/user', userRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

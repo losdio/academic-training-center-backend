@@ -53,8 +53,8 @@ router.post('/register', registerUser);
  *           schema:
  *             type: object
  *             properties:
- *               email:
- *                 type: string
+ *               id:
+ *                 type: number
  *               password:
  *                 type: string
  *     responses:
@@ -89,6 +89,29 @@ router.post('/login', loginUser);
  *         description: User not found
  */
 router.post('/forgot-password', forgotPassword);
+
+/**
+ * @swagger
+ * /auth/reset-password:
+ *   post:
+ *     summary: Send a password reset link
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: User's registered email
+ *     responses:
+ *       200:
+ *         description: Reset link sent successfully
+ *       404:
+ *         description: User not found
+ */
 
 router.post('/reset-password', resetPassword);
 

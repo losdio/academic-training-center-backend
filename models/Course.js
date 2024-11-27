@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const CourseSchema = new mongoose.Schema({
+const courseSchema = new mongoose.Schema({
+    id: { type: Number, required: true, unique: true },
     name: { type: String, required: true },
     description: { type: String },
     trainer: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
@@ -16,6 +17,14 @@ const CourseSchema = new mongoose.Schema({
     ]
 });
 
+courseSchema.pre('save', async function(next) {
+    if (this.isNew) {
+        const lastCourse = await mongoose.model('Course').findOne().sort({ id: -1 });
+        this.id = lastCourse ?  lastCourse.id + 1 : 1;
+    }
+    next();
+});
 
 
-module.exports = mongoose.model('Course', CourseSchema);
+
+module.exports = mongoose.model('Course', courseSchema);
