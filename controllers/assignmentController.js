@@ -1,4 +1,4 @@
-const Course = require('../models/Course');
+const Course = require('../models/Assignment');
 
 // Add assignment to a course
 exports.addAssignment = async (req, res) => {
