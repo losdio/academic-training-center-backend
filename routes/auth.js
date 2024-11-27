@@ -11,7 +11,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/auth/register:
+ * /register:
  *   post:
  *     summary: Register a new user
  *     tags: [Authentication]
@@ -37,11 +37,11 @@ const router = express.Router();
  *       400:
  *         description: Bad request
  */
-router.post('/api/auth/register', registerUser);
+router.post('/register', registerUser);
 
 /**
  * @swagger
- * /api/auth/login:
+ * /login:
  *   post:
  *     summary: Login a user
  *     tags: [Authentication]
@@ -52,8 +52,8 @@ router.post('/api/auth/register', registerUser);
  *           schema:
  *             type: object
  *             properties:
- *               email:
- *                 type: string
+ *               id:
+ *                 type: integer
  *               password:
  *                 type: string
  *     responses:
@@ -62,11 +62,11 @@ router.post('/api/auth/register', registerUser);
  *       400:
  *         description: Bad request
  */
-router.post('/api/auth/login', loginUser);
+router.post('/login', loginUser);
 
 /**
  * @swagger
- * /api/auth/forgot-password:
+ * /forgot-password:
  *   post:
  *     summary: Request password reset
  *     tags: [Authentication]
@@ -85,11 +85,11 @@ router.post('/api/auth/login', loginUser);
  *       400:
  *         description: Bad request
  */
-router.post('/api/auth/forgot-password', forgotPassword);
+router.post('/forgot-password', forgotPassword);
 
 /**
  * @swagger
- * /api/auth/reset-password:
+ * /reset-password:
  *   post:
  *     summary: Reset password
  *     tags: [Authentication]
@@ -110,6 +110,6 @@ router.post('/api/auth/forgot-password', forgotPassword);
  *       400:
  *         description: Bad request
  */
-router.post('/api/auth/reset-password', resetPassword);
+router.post('/reset-password', resetPassword);
 
 module.exports = router;

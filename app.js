@@ -3,7 +3,7 @@ const swaggerSpec = require('./swaggerConfig');
 const express = require('express');
 const dotenv = require('dotenv');
 require('dotenv').config();
-const cors = require('cors');
+// const cors = require('cors');
 const connectDB = require('./config/db');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
@@ -27,7 +27,7 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors({ origin: process.env.CLIENT_URL || "*"}));
+// app.use(cors({ origin: process.env.CLIENT_URL || "*"}));
 app.use(express.json());
 app.use(helmet());
 app.use(limiter);

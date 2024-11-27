@@ -5,7 +5,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/announcement:
+ * /announcement:
  *   post:
  *     summary: Send an announcement
  *     tags: [Announcements]
@@ -28,11 +28,11 @@ const router = express.Router();
  *       400:
  *         description: Invalid input
  */
-router.post('/api/announcement', createAnnouncement);
+router.post('/announcement', createAnnouncement);
 
 /**
  * @swagger
- * /api/announcement:
+ * /announcement:
  *   get:
  *     summary: Get all announcements
  *     tags: [Announcements]
@@ -42,11 +42,11 @@ router.post('/api/announcement', createAnnouncement);
  *       500:
  *         description: Server error
  */
-router.get('/api/announcement', getAllAnnouncements);
+router.get('/announcement', getAllAnnouncements);
 
 /**
  * @swagger
- * /api/announcement/{id}:
+ * /announcement/{id}:
  *   get:
  *     summary: Get an announcement by ID
  *     tags: [Announcements]
@@ -63,11 +63,11 @@ router.get('/api/announcement', getAllAnnouncements);
  *       404:
  *         description: Announcement not found
  */
-router.get('/api/announcement/:id', getAnnouncementById);
+router.get('/announcement/:id', getAnnouncementById);
 
 /**
  * @swagger
- * /api/announcement/{id}:
+ * /announcement/{id}:
  *   put:
  *     summary: Update an announcement
  *     tags: [Announcements]
@@ -99,11 +99,11 @@ router.get('/api/announcement/:id', getAnnouncementById);
  *       404:
  *         description: Announcement not found
  */
-router.put('/api/announcement/:id', updateAnnouncement);
+router.put('/announcement/:id', updateAnnouncement);
 
 /**
  * @swagger
- * /api/announcement/{id}:
+ * /announcement/{id}:
  *   delete:
  *     summary: Delete an announcement
  *     tags: [Announcements]
@@ -120,6 +120,6 @@ router.put('/api/announcement/:id', updateAnnouncement);
  *       404:
  *         description: Announcement not found
  */
-router.delete('/api/announcement/:id', deleteAnnouncement);
+router.delete('/announcement/:id', deleteAnnouncement);
 
 module.exports = router;

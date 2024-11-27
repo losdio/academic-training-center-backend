@@ -5,7 +5,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/assignments/{courseId}:
+ * /assignments/{courseId}:
  *   post:
  *     summary: Add an assignment to a course
  *     tags: [Assignments]
@@ -21,11 +21,11 @@ const router = express.Router();
  *       201:
  *         description: Assignment added successfully
  */
-router.post('/api/assignments/:courseId', authMiddleware, addAssignment);
+router.post('/assignments/:courseId', authMiddleware, addAssignment);
 
 /**
  * @swagger
- * /api/assignments/submit/{courseId}/{assignmentId}:
+ * /assignments/submit/{courseId}/{assignmentId}:
  *   post:
  *     summary: Submit an assignment for a course
  *     tags: [Assignments]
@@ -46,6 +46,6 @@ router.post('/api/assignments/:courseId', authMiddleware, addAssignment);
  *       200:
  *         description: Assignment submitted successfully
  */
-router.post('/api/assignments/submit/:courseId/:assignmentId', authMiddleware, submitAssignment);
+router.post('/assignments/submit/:courseId/:assignmentId', authMiddleware, submitAssignment);
 
 module.exports = router;

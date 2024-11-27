@@ -17,7 +17,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/courses:
+ * /courses:
  *   post:
  *     summary: Create a new course
  *     tags: [Courses]
@@ -27,7 +27,7 @@ const router = express.Router();
  *       201:
  *         description: Course created successfully
  */
-router.post('/api/courses', authMiddleware, trainerMiddleware, createCourse);
+router.post('/courses', authMiddleware, trainerMiddleware, createCourse);
 
 /**
  * @swagger
@@ -47,11 +47,11 @@ router.post('/api/courses', authMiddleware, trainerMiddleware, createCourse);
  *       200:
  *         description: Course updated successfully
  */
-router.put('/api/courses/:courseId', authMiddleware, trainerMiddleware, updateCourse);
+router.put('/courses/:courseId', authMiddleware, trainerMiddleware, updateCourse);
 
 /**
  * @swagger
- * /api/courses/{courseId}:
+ * /courses/{courseId}:
  *   delete:
  *     summary: Delete a course
  *     tags: [Courses]
@@ -67,11 +67,11 @@ router.put('/api/courses/:courseId', authMiddleware, trainerMiddleware, updateCo
  *       200:
  *         description: Course deleted successfully
  */
-router.delete('/api/courses/:courseId', authMiddleware, trainerMiddleware, deleteCourse);
+router.delete('/courses/:courseId', authMiddleware, trainerMiddleware, deleteCourse);
 
 /**
  * @swagger
- * /api/courses:
+ * /courses:
  *   get:
  *     summary: List all courses
  *     tags: [Courses]
@@ -79,11 +79,11 @@ router.delete('/api/courses/:courseId', authMiddleware, trainerMiddleware, delet
  *       200:
  *         description: List of all courses
  */
-router.get('/api/courses', listCourses);
+router.get('/courses', listCourses);
 
 /**
  * @swagger
- * /api/courses/all:
+ * /courses/all:
  *   get:
  *     summary: Get all courses
  *     tags: [Courses]
@@ -91,11 +91,11 @@ router.get('/api/courses', listCourses);
  *       200:
  *         description: List of all courses
  */
-router.get('/api/courses/all', getAllCourses);
+router.get('/courses/all', getAllCourses);
 
 /**
  * @swagger
- * /api/courses/enroll/{courseId}:
+ * /courses/enroll/{courseId}:
  *   post:
  *     summary: Enroll in a course
  *     tags: [Courses]
@@ -111,11 +111,11 @@ router.get('/api/courses/all', getAllCourses);
  *       200:
  *         description: Enrolled in course successfully
  */
-router.post('/api/courses/enroll/:courseId', authMiddleware, enrollInCourse);
+router.post('/courses/enroll/:courseId', authMiddleware, enrollInCourse);
 
 /**
  * @swagger
- * /api/courses/my:
+ * /courses/my:
  *   get:
  *     summary: Get my courses
  *     tags: [Courses]
@@ -125,11 +125,11 @@ router.post('/api/courses/enroll/:courseId', authMiddleware, enrollInCourse);
  *       200:
  *         description: List of my courses
  */
-router.get('/api/courses/my', authMiddleware, getMyCourses);
+router.get('/courses/my', authMiddleware, getMyCourses);
 
 /**
  * @swagger
- * /api/courses/my/{courseId}:
+ * /courses/my/{courseId}:
  *   get:
  *     summary: Get my course by ID
  *     tags: [Courses]
@@ -145,6 +145,6 @@ router.get('/api/courses/my', authMiddleware, getMyCourses);
  *       200:
  *         description: Course details
  */
-router.get('/api/courses/my/:courseId', authMiddleware, getMyCourseById);
+router.get('/courses/my/:courseId', authMiddleware, getMyCourseById);
 
 module.exports = router;
