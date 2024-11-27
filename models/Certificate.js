@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const certificateSchema = new mongoose.Schema({
-    id: { type: Number, required: true, unique: true },
+    id: { type: Number },
     trainee: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     course: { type: mongoose.Schema.Types.ObjectId, ref: 'Course', required: true },
     issuedAt: { type: Date, default: Date.now },

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const assignmentSchema = new mongoose.Schema({
-    id: { type: Number, required: true, unique: true },
+    id: { type: Number },
     course: { type: mongoose.Schema.Types.ObjectId, ref: 'Course', required: true },
     title: { type: String, required: true },
     description: { type: String },
