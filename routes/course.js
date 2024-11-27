@@ -8,6 +8,7 @@ const {
 const { getAllCourses, enrollInCourse } = require('../controllers/courseController'); // Ensure these are functions
 const { getMyCourses, getMyCourseById } = require('../controllers/courseController');
 const authMiddleware = require('../middlewares/authMiddleware');
+const trainerMiddleware = require('../middlewares/trainerMiddleware');
 const router = express.Router();
 
 router.post('/', authMiddleware, trainerMiddleware, createCourse);

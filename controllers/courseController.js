@@ -63,6 +63,17 @@ exports.getAllCourses = async (req, res) => {
     }
 };
 
+exports.getMyCourses = async (req, res) => {
+    try {
+        // Assuming req.user.id contains the logged-in user's ID
+        const courses = await Course.find({ enrolledTrainees: req.user.id }).populate('trainer', 'name email');
+
+        res.status(200).json(courses);
+    } catch (error) {
+        res.status(500).json({ error: 'Error fetching your courses' });
+    }
+};
+
 exports.getMyCourseById = async (req, res) => {
     const { courseId } = req.params;
 

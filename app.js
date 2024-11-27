@@ -3,6 +3,7 @@ const swaggerSpec = require('./swaggerConfig');
 const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
+const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
 const courseRoutes = require('./routes/course');
 const assignmentRoutes = require('./routes/assignment');
@@ -14,6 +15,7 @@ const limiter = rateLimit({
     max: 100 
 });
 
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 dotenv.config();
 const app = express();
 
