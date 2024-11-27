@@ -1,5 +1,5 @@
 const express = require('express');
-const { loginUser, registerUser, resetPassword } = require('../controllers/authController');
+const { loginUser, registerUser, forgotPassword, resetPassword } = require('../controllers/authController');
 const router = express.Router();
 
 /**
@@ -38,6 +38,8 @@ const router = express.Router();
  *         description: Bad request
  */
 
+router.post('/register', registerUser);
+
 /**
  * @swagger
  * /auth/login:
@@ -62,8 +64,32 @@ const router = express.Router();
  *         description: Invalid credentials
  */
 
-router.post('/register', registerUser);
 router.post('/login', loginUser);
+
+/**
+ * @swagger
+ * /auth/forgot-password:
+ *   post:
+ *     summary: Send a password reset link
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: User's registered email
+ *     responses:
+ *       200:
+ *         description: Reset link sent successfully
+ *       404:
+ *         description: User not found
+ */
+router.post('/forgot-password', forgotPassword);
+
 router.post('/reset-password', resetPassword);
 
 module.exports = router;
