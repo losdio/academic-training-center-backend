@@ -5,7 +5,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /announcement:
+ * /api/announcement:
  *   post:
  *     summary: Send an announcement
  *     tags: [Announcements]
@@ -28,11 +28,11 @@ const router = express.Router();
  *       400:
  *         description: Invalid input
  */
-router.post('/', createAnnouncement);
+router.post('/api/announcement', createAnnouncement);
 
 /**
  * @swagger
- * /announcement:
+ * /api/announcement:
  *   get:
  *     summary: Get all announcements
  *     tags: [Announcements]
@@ -42,11 +42,11 @@ router.post('/', createAnnouncement);
  *       500:
  *         description: Server error
  */
-router.get('/', getAllAnnouncements);
+router.get('/api/announcement', getAllAnnouncements);
 
 /**
  * @swagger
- * /announcement/{id}:
+ * /api/announcement/{id}:
  *   get:
  *     summary: Get an announcement by ID
  *     tags: [Announcements]
@@ -63,11 +63,11 @@ router.get('/', getAllAnnouncements);
  *       404:
  *         description: Announcement not found
  */
-router.get('/:id', getAnnouncementById);
+router.get('/api/announcement/:id', getAnnouncementById);
 
 /**
  * @swagger
- * /announcement/{id}:
+ * /api/announcement/{id}:
  *   put:
  *     summary: Update an announcement
  *     tags: [Announcements]
@@ -99,11 +99,11 @@ router.get('/:id', getAnnouncementById);
  *       404:
  *         description: Announcement not found
  */
-router.put('/:id', updateAnnouncement);
+router.put('/api/announcement/:id', updateAnnouncement);
 
 /**
  * @swagger
- * /announcement/{id}:
+ * /api/announcement/{id}:
  *   delete:
  *     summary: Delete an announcement
  *     tags: [Announcements]
@@ -120,6 +120,6 @@ router.put('/:id', updateAnnouncement);
  *       404:
  *         description: Announcement not found
  */
-router.delete('/:id', deleteAnnouncement);
+router.delete('/api/announcement/:id', deleteAnnouncement);
 
 module.exports = router;

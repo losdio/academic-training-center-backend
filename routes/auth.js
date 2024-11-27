@@ -11,7 +11,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /auth/register:
+ * /api/auth/register:
  *   post:
  *     summary: Register a new user
  *     tags: [Authentication]
@@ -37,12 +37,11 @@ const router = express.Router();
  *       400:
  *         description: Bad request
  */
-
-router.post('/register', registerUser);
+router.post('/api/auth/register', registerUser);
 
 /**
  * @swagger
- * /auth/login:
+ * /api/auth/login:
  *   post:
  *     summary: Login a user
  *     tags: [Authentication]
@@ -53,24 +52,23 @@ router.post('/register', registerUser);
  *           schema:
  *             type: object
  *             properties:
- *               id:
- *                 type: number
+ *               email:
+ *                 type: string
  *               password:
  *                 type: string
  *     responses:
  *       200:
- *         description: Login successful
- *       401:
- *         description: Invalid credentials
+ *         description: User logged in successfully
+ *       400:
+ *         description: Bad request
  */
-
-router.post('/login', loginUser);
+router.post('/api/auth/login', loginUser);
 
 /**
  * @swagger
- * /auth/forgot-password:
+ * /api/auth/forgot-password:
  *   post:
- *     summary: Send a password reset link
+ *     summary: Request password reset
  *     tags: [Authentication]
  *     requestBody:
  *       required: true
@@ -81,20 +79,19 @@ router.post('/login', loginUser);
  *             properties:
  *               email:
  *                 type: string
- *                 description: User's registered email
  *     responses:
  *       200:
- *         description: Reset link sent successfully
- *       404:
- *         description: User not found
+ *         description: Password reset link sent
+ *       400:
+ *         description: Bad request
  */
-router.post('/forgot-password', forgotPassword);
+router.post('/api/auth/forgot-password', forgotPassword);
 
 /**
  * @swagger
- * /auth/reset-password:
+ * /api/auth/reset-password:
  *   post:
- *     summary: Send a password reset link
+ *     summary: Reset password
  *     tags: [Authentication]
  *     requestBody:
  *       required: true
@@ -103,16 +100,16 @@ router.post('/forgot-password', forgotPassword);
  *           schema:
  *             type: object
  *             properties:
- *               email:
+ *               token:
  *                 type: string
- *                 description: User's registered email
+ *               newPassword:
+ *                 type: string
  *     responses:
  *       200:
- *         description: Reset link sent successfully
- *       404:
- *         description: User not found
+ *         description: Password reset successfully
+ *       400:
+ *         description: Bad request
  */
-
-router.post('/reset-password', resetPassword);
+router.post('/api/auth/reset-password', resetPassword);
 
 module.exports = router;

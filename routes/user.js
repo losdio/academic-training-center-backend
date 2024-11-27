@@ -6,7 +6,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /me:
+ * /api/me:
  *   get:
  *     summary: Get the current user's profile
  *     tags: [User]
@@ -18,11 +18,11 @@ const router = express.Router();
  *       401:
  *         description: Unauthorized
  */
-router.get('/me', authMiddleware, getUserProfile);
+router.get('/api/me', authMiddleware, getUserProfile);
 
 /**
  * @swagger
- * /me:
+ * /api/me:
  *   put:
  *     summary: Update the current user's profile
  *     tags: [User]
@@ -47,11 +47,11 @@ router.get('/me', authMiddleware, getUserProfile);
  *       401:
  *         description: Unauthorized
  */
-router.put('/me', authMiddleware, updateUserProfile);
+router.put('/api/me', authMiddleware, updateUserProfile);
 
 /**
  * @swagger
- * /:
+ * /api/users:
  *   get:
  *     summary: List all users
  *     tags: [User]
@@ -62,9 +62,7 @@ router.put('/me', authMiddleware, updateUserProfile);
  *         description: Successfully retrieved list of users
  *       401:
  *         description: Unauthorized
- *       403:
- *         description: Forbidden
  */
-router.get('/', authMiddleware, adminMiddleware, listUsers);
+router.get('/api/users', authMiddleware, adminMiddleware, listUsers);
 
 module.exports = router;

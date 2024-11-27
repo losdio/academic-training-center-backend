@@ -5,7 +5,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /attendance/{courseId}:
+ * /api/attendance/{courseId}:
  *   post:
  *     summary: Mark attendance for a course
  *     tags: [Attendance]
@@ -21,11 +21,11 @@ const router = express.Router();
  *       200:
  *         description: Attendance marked successfully
  */
-router.post('/:courseId', authMiddleware, markAttendance);
+router.post('/api/attendance/:courseId', authMiddleware, markAttendance);
 
 /**
  * @swagger
- * /attendance/{courseId}:
+ * /api/attendance/{courseId}:
  *   get:
  *     summary: Get attendance report for a course
  *     tags: [Attendance]
@@ -41,6 +41,6 @@ router.post('/:courseId', authMiddleware, markAttendance);
  *       200:
  *         description: Attendance report retrieved successfully
  */
-router.get('/:courseId', authMiddleware, getAttendance);
+router.get('/api/attendance/:courseId', authMiddleware, getAttendance);
 
 module.exports = router;

@@ -17,7 +17,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /courses:
+ * /api/courses:
  *   post:
  *     summary: Create a new course
  *     tags: [Courses]
@@ -27,11 +27,11 @@ const router = express.Router();
  *       201:
  *         description: Course created successfully
  */
-router.post('/', authMiddleware, trainerMiddleware, createCourse);
+router.post('/api/courses', authMiddleware, trainerMiddleware, createCourse);
 
 /**
  * @swagger
- * /courses/{courseId}:
+ * /api/courses/{courseId}:
  *   put:
  *     summary: Update an existing course
  *     tags: [Courses]
@@ -47,11 +47,11 @@ router.post('/', authMiddleware, trainerMiddleware, createCourse);
  *       200:
  *         description: Course updated successfully
  */
-router.put('/:courseId', authMiddleware, trainerMiddleware, updateCourse);
+router.put('/api/courses/:courseId', authMiddleware, trainerMiddleware, updateCourse);
 
 /**
  * @swagger
- * /courses/{courseId}:
+ * /api/courses/{courseId}:
  *   delete:
  *     summary: Delete a course
  *     tags: [Courses]
@@ -67,25 +67,23 @@ router.put('/:courseId', authMiddleware, trainerMiddleware, updateCourse);
  *       200:
  *         description: Course deleted successfully
  */
-router.delete('/:courseId', authMiddleware, trainerMiddleware, deleteCourse);
+router.delete('/api/courses/:courseId', authMiddleware, trainerMiddleware, deleteCourse);
 
 /**
  * @swagger
- * /courses:
+ * /api/courses:
  *   get:
  *     summary: List all courses
  *     tags: [Courses]
- *     security:
- *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: List of courses
+ *         description: List of all courses
  */
-router.get('/', authMiddleware, listCourses);
+router.get('/api/courses', listCourses);
 
 /**
  * @swagger
- * /courses:
+ * /api/courses/all:
  *   get:
  *     summary: Get all courses
  *     tags: [Courses]
@@ -93,45 +91,11 @@ router.get('/', authMiddleware, listCourses);
  *       200:
  *         description: List of all courses
  */
-router.get('/', getAllCourses);
+router.get('/api/courses/all', getAllCourses);
 
 /**
  * @swagger
- * /courses/my-courses:
- *   get:
- *     summary: Get all courses for the trainee
- *     tags: [Courses]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: List of courses for the trainee
- */
-router.get('/my-courses', authMiddleware, getMyCourses);
-
-/**
- * @swagger
- * /courses/my-courses/{courseId}:
- *   get:
- *     summary: Get a specific course by ID for the trainee
- *     tags: [Courses]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: courseId
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Course details
- */
-router.get('/my-courses/:courseId', authMiddleware, getMyCourseById);
-
-/**
- * @swagger
- * /courses/enroll/{courseId}:
+ * /api/courses/enroll/{courseId}:
  *   post:
  *     summary: Enroll in a course
  *     tags: [Courses]
@@ -147,6 +111,40 @@ router.get('/my-courses/:courseId', authMiddleware, getMyCourseById);
  *       200:
  *         description: Enrolled in course successfully
  */
-router.post('/enroll/:courseId', authMiddleware, enrollInCourse);
+router.post('/api/courses/enroll/:courseId', authMiddleware, enrollInCourse);
+
+/**
+ * @swagger
+ * /api/courses/my:
+ *   get:
+ *     summary: Get my courses
+ *     tags: [Courses]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of my courses
+ */
+router.get('/api/courses/my', authMiddleware, getMyCourses);
+
+/**
+ * @swagger
+ * /api/courses/my/{courseId}:
+ *   get:
+ *     summary: Get my course by ID
+ *     tags: [Courses]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: courseId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Course details
+ */
+router.get('/api/courses/my/:courseId', authMiddleware, getMyCourseById);
 
 module.exports = router;
