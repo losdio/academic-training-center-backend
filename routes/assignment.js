@@ -1,6 +1,7 @@
 const express = require('express');
 const { addAssignment, submitAssignment } = require('../controllers/assignmentController');
 const authMiddleware = require('../middlewares/authMiddleware');
+const trainerMiddleware = require('../middlewares/trainerMiddleware');
 const router = express.Router();
 
 /**
@@ -21,7 +22,7 @@ const router = express.Router();
  *       201:
  *         description: Assignment added successfully
  */
-router.post('/:courseId', authMiddleware, addAssignment);
+router.post('/:courseId', authMiddleware, trainerMiddleware, addAssignment);
 
 /**
  * @swagger

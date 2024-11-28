@@ -1,12 +1,12 @@
 const express = require('express');
 const { getUserProfile, updateUserProfile, listUsers } = require('../controllers/userController');
 const authMiddleware = require('../middlewares/authMiddleware');
-const adminMiddleware = require('../middlewares/adminMiddleware');
+const adminOnlyMiddleware = require('../middlewares/adminMiddleware');
 const router = express.Router();
 
 /**
  * @swagger
- * /me:
+ * /user/me:
  *   get:
  *     summary: Get the current user's profile
  *     tags: [User]
@@ -18,11 +18,11 @@ const router = express.Router();
  *       401:
  *         description: Unauthorized
  */
-router.get('/', authMiddleware, getUserProfile);
+router.get('/me', authMiddleware, getUserProfile);
 
 /**
  * @swagger
- * /me:
+ * /user/me:
  *   put:
  *     summary: Update the current user's profile
  *     tags: [User]
@@ -47,11 +47,11 @@ router.get('/', authMiddleware, getUserProfile);
  *       401:
  *         description: Unauthorized
  */
-router.put('/', authMiddleware, updateUserProfile);
+router.put('/me', authMiddleware, updateUserProfile);
 
 /**
  * @swagger
- * /users:
+ * /users/list-users:
  *   get:
  *     summary: List all users
  *     tags: [User]
@@ -63,6 +63,6 @@ router.put('/', authMiddleware, updateUserProfile);
  *       401:
  *         description: Unauthorized
  */
-router.get('/', authMiddleware, adminMiddleware, listUsers);
+router.get('/list-users', authMiddleware, adminOnlyMiddleware, listUsers);
 
 module.exports = router;

@@ -23,4 +23,8 @@ UserSchema.pre('save', async function(next) {
     next();
 });
 
+UserSchema.statics.findById = function(id) {
+    return this.findOne({ id: this.id });
+};
+
 module.exports = mongoose.model('User', UserSchema);

@@ -1,6 +1,7 @@
 const express = require('express');
 const { markAttendance, getAttendance } = require('../controllers/attendanceController');
 const authMiddleware = require('../middlewares/authMiddleware');
+const trainerMiddleware = require('../middlewares/trainerMiddleware');
 const router = express.Router();
 
 /**
@@ -21,7 +22,7 @@ const router = express.Router();
  *       200:
  *         description: Attendance marked successfully
  */
-router.post('/:courseId', authMiddleware, markAttendance);
+router.post('/:courseId', authMiddleware, trainerMiddleware, markAttendance);
 
 /**
  * @swagger

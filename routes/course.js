@@ -12,7 +12,7 @@ const {
     submitAssignment
 } = require('../controllers/courseController');
 const authMiddleware = require('../middlewares/authMiddleware');
-const trainerMiddleware = require('../middlewares/trainerMiddleware');
+const adminOnlyMiddleware = require('../middlewares/adminMiddleware');
 const router = express.Router();
 
 /**
@@ -27,11 +27,11 @@ const router = express.Router();
  *       201:
  *         description: Course created successfully
  */
-router.post('/', authMiddleware, trainerMiddleware, createCourse);
+router.post('/', authMiddleware, adminOnlyMiddleware, createCourse);
 
 /**
  * @swagger
- * /api/courses/{courseId}:
+ * /courses/{courseId}:
  *   put:
  *     summary: Update an existing course
  *     tags: [Courses]
@@ -47,7 +47,7 @@ router.post('/', authMiddleware, trainerMiddleware, createCourse);
  *       200:
  *         description: Course updated successfully
  */
-router.put('/:courseId', authMiddleware, trainerMiddleware, updateCourse);
+router.put('/:courseId', authMiddleware, adminOnlyMiddleware, updateCourse);
 
 /**
  * @swagger
@@ -67,7 +67,7 @@ router.put('/:courseId', authMiddleware, trainerMiddleware, updateCourse);
  *       200:
  *         description: Course deleted successfully
  */
-router.delete('/:courseId', authMiddleware, trainerMiddleware, deleteCourse);
+router.delete('/:courseId', authMiddleware, adminOnlyMiddleware, deleteCourse);
 
 /**
  * @swagger

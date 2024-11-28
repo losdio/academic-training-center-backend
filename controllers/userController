@@ -1,9 +1,24 @@
+const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+
+// Middleware to extract user ID from token
+const extractUserIdFromToken = (req) => {
+    const authHeader = req.header('Authorization');
+    if (!authHeader) {
+        throw new Error('No token provided');
+    }
+
+    const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7, authHeader.length) : authHeader;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    return decoded.id;
+};
 
 // Get logged-in user's profile
 exports.getUserProfile = async (req, res) => {
     try {
-        const user = await User.findById(req.user.id).select('-password');
+        const userId = extractUserIdFromToken(req.header('Authorization'));
+        console.log(userId);
+        const user = await User.findById(userId).select('-password');
         res.status(200).json(user);
     } catch (error) {
         res.status(500).json({ error: 'Error fetching user profile' });
@@ -14,7 +29,8 @@ exports.getUserProfile = async (req, res) => {
 exports.updateUserProfile = async (req, res) => {
     const { name, email } = req.body;
     try {
-        const user = await User.findById(req.user.id);
+        const userId = extractUserIdFromToken(req.header('Authorization'));
+        const user = await User.findById(userId);
         if (!user) return res.status(404).json({ error: 'User not found' });
 
         user.name = name || user.name;

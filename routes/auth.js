@@ -1,5 +1,6 @@
 const express = require('express');
-const { loginUser, registerUser, forgotPassword, resetPassword } = require('../controllers/authController');
+const { loginUser, registerUser, forgotPassword, resetPassword, registerUserTest } = require('../controllers/authController');
+const adminOnlyMiddleware = require('../middlewares/adminMiddleware');
 const router = express.Router();
 
 /**
@@ -24,6 +25,37 @@ const router = express.Router();
  *             properties:
  *               name:
  *                 type: string
+ *               username: 
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ *       400:
+ *         description: Bad request
+ */
+router.post('/register', registerUser);
+
+/**
+ * @swagger
+ * /auth/register-test:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               username: 
+ *                 type: string
  *               email:
  *                 type: string
  *               password:
@@ -37,7 +69,7 @@ const router = express.Router();
  *       400:
  *         description: Bad request
  */
-router.post('/register', registerUser);
+router.post('/register-test', adminOnlyMiddleware, registerUserTest);
 
 /**
  * @swagger
@@ -52,8 +84,8 @@ router.post('/register', registerUser);
  *           schema:
  *             type: object
  *             properties:
- *               id:
- *                 type: integer
+ *               username:
+ *                 type: string
  *               password:
  *                 type: string
  *     responses:
