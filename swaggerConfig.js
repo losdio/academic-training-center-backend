@@ -10,7 +10,7 @@ const options = {
         },
         servers: [
             {
-                url: 'http://localhost:5000/api',
+                url: 'https://academic-training-center-backend.onrender.com/api',
                 description: 'Development server'
             }
         ],
