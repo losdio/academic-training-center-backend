@@ -15,10 +15,10 @@ const userRoutes = require('./routes/user');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 100 
-});
+// const limiter = rateLimit({
+//     windowMs: 15 * 60 * 1000,
+//     max: 10000 
+// });
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('Connected successfully'))
 .catch(err => console.error('Connection failed:', err));
@@ -34,7 +34,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(helmet());
-app.use(limiter);
+// app.use(limiter);
 
 // Connect Database
 connectDB();
