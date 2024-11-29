@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken');
 
 const adminOnlyMiddleware = (req, res, next) => {
-    const authHeader = req.header('Authorization');
-    if (!authHeader) {
+    const tokenPackage = req.body.token;
+    if (!tokenPackage) {
         return res.status(401).json({ error: 'Access denied: No token provided' });
     }
 
-    const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7, authHeader.length) : authHeader;
+    const token = tokenPackage.token;
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
