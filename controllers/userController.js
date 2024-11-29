@@ -3,14 +3,15 @@ const User = require('../models/User');
 
 // Middleware to extract user ID from token
 const extractUserIdFromToken = (req) => {
-    const authHeader = req.header('Authorization');
-    if (!authHeader) {
-        throw new Error('No token provided');
+    const tokenPackage = req.body.token;
+    if (!tokenPackage) {
+        return res.status(401).json({ error: 'Access denied: No token provided' });
     }
 
-    const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7, authHeader.length) : authHeader;
+    const token = tokenPackage.token;
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    return decoded.id;
+    return decoded.data.id;
 };
 
 // Get logged-in user's profile
