@@ -13,7 +13,7 @@ const attendanceRoutes = require('./routes/attendance');
 const announcementRoutes = require('./routes/announcement');
 const userRoutes = require('./routes/user');
 const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
+// const rateLimit = require('express-rate-limit');
 
 // const limiter = rateLimit({
 //     windowMs: 15 * 60 * 1000,
