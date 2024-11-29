@@ -33,7 +33,18 @@ exports.loginUser = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' });
 
-        const token = jwt.sign({ data: user.id, name: user.name, username: user.username, number: user.phoneNumber, role: user.role, email: user.email }, process.env.JWT_SECRET, { expiresIn: '30m' });
+        const payload = {
+            iss: "ATC",                  // Issuer
+            sub: user.name,                   // Subject (e.g., user ID)
+            aud: "https://academic-training-center-backend.onrender.com",             // Audience
+            exp: Math.floor(Date.now() / 1000) + (60 * 30), // Expiration time (1 hour from now)
+            iat: Math.floor(Date.now() / 1000),            // Issued at
+            id: user.id,             // Custom claim: User ID
+            role: user.role,       // Custom claim: User roles
+            email: user.email         // Custom claim: User email
+          };
+
+        const token = jwt.sign({ data: payload }, process.env.JWT_SECRET, { expiresIn: '30m' });
         res.status(200).json({data: {token: token}, message: "Login successful"});
     } catch (error) {
         res.status(400).json({ error: 'Error logging in' });

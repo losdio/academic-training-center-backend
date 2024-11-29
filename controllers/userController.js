@@ -3,12 +3,11 @@ const User = require('../models/User');
 
 // Middleware to extract user ID from token
 const extractUserIdFromToken = (req) => {
-    
     if (!req) {
         return res.status(401).json({ error: 'Access denied: No token provided' });
     }
 
-    const token = req.token;
+    const token = req.startsWith('Bearer ') ? req.slice(7, req.length) : req;
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     return decoded.data.id;
