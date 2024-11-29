@@ -19,7 +19,7 @@ exports.getUserProfile = async (req, res) => {
         const userId = extractUserIdFromToken(req.header('Authorization'));
         console.log(userId);
         const user = await User.findById(userId).select('-password');
-        res.status(200).json(user);
+        res.status(200).json({data: user, message: 'User profile fetched successfully'});
     } catch (error) {
         res.status(400).json({ error: 'Error fetching user profile' });
     }
