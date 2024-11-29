@@ -12,7 +12,7 @@ const authMiddleware = async (req, res, next) => {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        if (!decoded.role){
+        if (!decoded.data.role){
             return res.status(403).json({ error: 'Access denied: Invalid user' });
         }
         
