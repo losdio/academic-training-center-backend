@@ -15,7 +15,7 @@ const router = express.Router();
  *     responses:
  *       200:
  *         description: Successfully retrieved user profile
- *       401:
+ *       400:
  *         description: Unauthorized
  */
 router.get('/me', authMiddleware, getUserProfile);
@@ -44,7 +44,7 @@ router.get('/me', authMiddleware, getUserProfile);
  *         description: Successfully updated user profile
  *       400:
  *         description: Bad request
- *       401:
+ *       400:
  *         description: Unauthorized
  */
 router.put('/me', authMiddleware, updateUserProfile);
@@ -60,7 +60,7 @@ router.put('/me', authMiddleware, updateUserProfile);
  *     responses:
  *       200:
  *         description: Successfully retrieved list of users
- *       401:
+ *       400:
  *         description: Unauthorized
  */
 router.get('/list-users', authMiddleware, adminOnlyMiddleware, listUsers);

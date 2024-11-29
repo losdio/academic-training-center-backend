@@ -19,7 +19,7 @@ const router = express.Router();
  *         schema:
  *           type: string
  *     responses:
- *       201:
+ *       200:
  *         description: Assignment added successfully
  */
 router.post('/:courseId', authMiddleware, trainerMiddleware, addAssignment);

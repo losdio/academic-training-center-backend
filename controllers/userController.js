@@ -21,7 +21,7 @@ exports.getUserProfile = async (req, res) => {
         const user = await User.findById(userId).select('-password');
         res.status(200).json(user);
     } catch (error) {
-        res.status(500).json({ error: 'Error fetching user profile' });
+        res.status(400).json({ error: 'Error fetching user profile' });
     }
 };
 
@@ -39,7 +39,7 @@ exports.updateUserProfile = async (req, res) => {
 
         res.status(200).json({ message: 'Profile updated successfully', user });
     } catch (error) {
-        res.status(500).json({ error: 'Error updating profile' });
+        res.status(400).json({ error: 'Error updating profile' });
     }
 };
 
@@ -49,6 +49,6 @@ exports.listUsers = async (req, res) => {
         const users = await User.find().select('-password');
         res.status(200).json(users);
     } catch (error) {
-        res.status(500).json({ error: 'Error fetching users' });
+        res.status(400).json({ error: 'Error fetching users' });
     }
 };

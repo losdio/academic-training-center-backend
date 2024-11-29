@@ -14,7 +14,7 @@ exports.addAssignment = async (req, res) => {
 
         res.status(200).json({ message: 'Assignment added', assignments: course.assignments });
     } catch (error) {
-        res.status(500).json({ error: 'Error adding assignment' });
+        res.status(400).json({ error: 'Error adding assignment' });
     }
 };
 
@@ -35,6 +35,6 @@ exports.submitAssignment = async (req, res) => {
 
         res.status(200).json({ message: 'Assignment submitted' });
     } catch (error) {
-        res.status(500).json({ error: 'Error submitting assignment' });
+        res.status(400).json({ error: 'Error submitting assignment' });
     }
 };

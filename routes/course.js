@@ -24,7 +24,7 @@ const router = express.Router();
  *     security:
  *       - bearerAuth: []
  *     responses:
- *       201:
+ *       200:
  *         description: Course created successfully
  */
 router.post('/', authMiddleware, adminOnlyMiddleware, createCourse);

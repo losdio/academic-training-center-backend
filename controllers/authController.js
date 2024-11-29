@@ -9,7 +9,7 @@ exports.registerUser = async (req, res) => {
         await user.save();
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
-        res.status(500).json({ error: 'Error registering user' });
+        res.status(400).json({ error: 'Error registering user' });
     }
 };
 
@@ -20,7 +20,7 @@ exports.registerUserTest = async (req, res) => {
         await user.save();
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
-        res.status(500).json({ error: 'Error registering user' });
+        res.status(400).json({ error: 'Error registering user' });
     }
 };
 
@@ -36,7 +36,7 @@ exports.loginUser = async (req, res) => {
         const token = jwt.sign({ id: user.id, name: user.name, username: user.username, number: user.phoneNumber, role: user.role, email: user.email }, process.env.JWT_SECRET, { expiresIn: '30m' });
         res.status(200).send(token);
     } catch (error) {
-        res.status(500).json({ error: 'Error logging in' });
+        res.status(400).json({ error: 'Error logging in' });
     }
 };
 
@@ -51,7 +51,7 @@ exports.forgotPassword = async (req, res) => {
 
         res.status(200).json({ message: 'Password reset successful' });
     } catch (error) {
-        res.status(500).json({ error: 'Error resetting password' });
+        res.status(400).json({ error: 'Error resetting password' });
     }
 };
 
@@ -66,6 +66,6 @@ exports.resetPassword = async (req, res) => {
 
         res.status(200).json({ message: 'Password reset successful' });
     } catch (error) {
-        res.status(500).json({ error: 'Error resetting password' });
+        res.status(400).json({ error: 'Error resetting password' });
     }
 };

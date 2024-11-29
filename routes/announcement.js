@@ -39,7 +39,7 @@ router.post('/', createAnnouncement);
  *     responses:
  *       200:
  *         description: List of all announcements
- *       500:
+ *       400:
  *         description: Server error
  */
 router.get('/', getAllAnnouncements);

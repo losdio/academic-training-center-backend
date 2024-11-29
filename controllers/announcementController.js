@@ -6,7 +6,7 @@ exports.getAllAnnouncements = async (req, res) => {
         const announcements = await Announcement.find();
         res.status(200).json(announcements);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(400).json({ message: error.message });
     }
 };
 
@@ -19,7 +19,7 @@ exports.getAnnouncementById = async (req, res) => {
         }
         res.status(200).json(announcement);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(400).json({ message: error.message });
     }
 };
 
@@ -69,6 +69,6 @@ exports.deleteAnnouncement = async (req, res) => {
         await announcement.remove();
         res.status(200).json({ message: 'Announcement deleted' });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(400).json({ message: error.message });
     }
 };

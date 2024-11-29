@@ -149,9 +149,9 @@ exports.submitAssignment = async (req, res) => {
         });
 
         await course.save();
-        res.status(201).json({ message: 'Assignment submitted successfully' });
+        res.status(200).json({ message: 'Assignment submitted successfully' });
     } catch (error) {
-        res.status(500).json({ error: 'Error submitting assignment' });
+        res.status(400).json({ error: 'Error submitting assignment' });
     }
 };
 
@@ -165,8 +165,8 @@ exports.markAttendance = async (req, res) => {
 
         course.attendance.push({ date, attendees });
         await course.save();
-        res.status(201).json({ message: 'Attendance marked successfully' });
+        res.status(200).json({ message: 'Attendance marked successfully' });
     } catch (error) {
-        res.status(500).json({ error: 'Error marking attendance' });
+        res.status(400).json({ error: 'Error marking attendance' });
     }
 };

@@ -32,7 +32,7 @@ const router = express.Router();
  *               password:
  *                 type: string
  *     responses:
- *       201:
+ *       200:
  *         description: User registered successfully
  *       400:
  *         description: Bad request
@@ -64,7 +64,7 @@ router.post('/register', registerUser);
  *                 type: string
  *                 enum: [admin, trainer, trainee]
  *     responses:
- *       201:
+ *       200:
  *         description: User registered successfully
  *       400:
  *         description: Bad request
