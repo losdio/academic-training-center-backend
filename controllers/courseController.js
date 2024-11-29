@@ -6,7 +6,7 @@ exports.createCourse = async (req, res) => {
     try {
         const course = new Course({ name, description, price, trainer: req.user.id });
         await course.save();
-        res.status(201).json(course);
+        res.status(200).json(course);
     } catch (error) {
         res.status(500).json({ error: 'Error creating course' });
     }
@@ -125,7 +125,7 @@ exports.addAssignment = async (req, res) => {
 
         course.assignments.push({ title, description, dueDate });
         await course.save();
-        res.status(201).json({ message: 'Assignment added successfully' });
+        res.status(200).json({ message: 'Assignment added successfully' });
     } catch (error) {
         res.status(500).json({ error: 'Error adding assignment' });
     }
