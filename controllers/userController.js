@@ -19,7 +19,8 @@ exports.getUserProfile = async (req, res) => {
         const userId = extractUserIdFromToken(req.header('Authorization'));
         console.log(userId);
         const user = await User.findById(userId).select('-password');
-        res.status(200).json({data: user, message: 'User profile fetched successfully'});
+        if (!user) return res.status(404).json({ error: 'User not found' });
+        res.status(200).json({data: { name: user.name, email: user.email, phoneNumber: user.phoneNumber, username: user.username }, message: 'User profile fetched successfully'});
     } catch (error) {
         res.status(400).json({ error: 'Error fetching user profile' });
     }
