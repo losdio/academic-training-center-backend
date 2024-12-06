@@ -7,7 +7,7 @@ exports.registerUser = async (req, res) => {
     try {
         const user = new User({ name, username, email, password });
         await user.save();
-        res.status(201).json({ message: 'User registered successfully' });
+        res.status(200).json({ message: 'User registered successfully' });
     } catch (error) {
         res.status(400).json({ error: 'Error registering user' });
     }
@@ -18,7 +18,7 @@ exports.registerUserTest = async (req, res) => {
     try {
         const user = new User({ name, username, email, password, role });
         await user.save();
-        res.status(201).json({ message: 'User registered successfully' });
+        res.status(200).json({ message: 'User registered successfully' });
     } catch (error) {
         res.status(400).json({ error: 'Error registering user' });
     }
@@ -35,7 +35,7 @@ exports.loginUser = async (req, res) => {
 
         const payload = {
             iss: "ATC",                  // Issuer
-            sub: user.name,                   // Subject (e.g., user ID)
+            sub: user.id,                   // Subject (e.g., user ID)
             aud: "https://academic-training-center-backend.onrender.com",             // Audience
             exp: Math.floor(Date.now() / 1000) + (60 * 30), // Expiration time (1 hour from now)
             iat: Math.floor(Date.now() / 1000),            // Issued at
