@@ -2,15 +2,17 @@ const Course = require('../models/Course');
 
 // Create a new course
 exports.createCourse = async (req, res) => {
-    const { name, description, price } = req.body;
     try {
-        const course = new Course({ name, description, price, trainer: req.user.id });
-        await course.save();
-        res.status(200).json(course);
+      if (req.user.role !== 'admin') {
+        return res.status(403).json({ error: 'Forbidden' });
+      }
+      const { course_name, description, price } = req.body;
+      const course = await Course.create({ course_name, description, price, trainer: req.user.id });
+      res.status(201).json(course);
     } catch (error) {
-        res.status(500).json({ error: 'Error creating course' });
+      res.status(500).json({ error: error.message });
     }
-};
+  };
 
 // Update a course
 exports.updateCourse = async (req, res) => {
@@ -54,13 +56,28 @@ exports.listCourses = async (req, res) => {
     }
 };
 
-exports.getAllCourses = async (req, res) => {
-    try {
-        const courses = await Course.find().populate('trainer');
-        res.status(200).json(courses);
-    } catch (error) {
-        res.status(500).json({ error: 'Error fetching courses' });
+const Course = require('../models/Course');
+
+exports.createCourse = async (req, res) => {
+  try {
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({ error: 'Forbidden' });
     }
+    const { course_name, description, price } = req.body;
+    const course = await Course.create({ course_name, description, price });
+    res.status(201).json(course);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.getAllCourses = async (req, res) => {
+  try {
+    const courses = await Course.find();
+    res.json(courses);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
 exports.getMyCourses = async (req, res) => {

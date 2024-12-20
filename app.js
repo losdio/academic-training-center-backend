@@ -47,6 +47,7 @@ app.use('/api/assignments', assignmentRoutes);
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/announcement', announcementRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/enrollment', enrollmentRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
